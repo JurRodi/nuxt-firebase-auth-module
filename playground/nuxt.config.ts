@@ -1,5 +1,18 @@
 export default defineNuxtConfig({
-  modules: ['../src/module'],
-  myModule: {},
+  modules: ['@pinia/nuxt', '../src/module'],
+  ssr: false,
   devtools: { enabled: true },
-})
+  runtimeConfig: {
+    public: {
+      firebaseAuth: {
+        config: {
+          apiKey: '_',
+        },
+        tenantId: '',
+        emulatorHost: 'http://localhost:9099',
+      },
+    },
+  },
+  compatibilityDate: '2025-01-09',
+  myModule: {},
+});
