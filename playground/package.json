@@ -9,6 +9,7 @@
     "preview": "nuxi preview"
   },
   "dependencies": {
+    "@picocss/pico": "^2.0.6",
     "@pinia/nuxt": "^0.9.0",
     "firebase": "^11.1.0",
     "firebase-admin": "^13.0.2",

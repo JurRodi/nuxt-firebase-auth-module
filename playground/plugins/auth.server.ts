@@ -1,5 +1,5 @@
 import { initializeServerApp } from 'firebase/app';
-import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth';
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const firebaseAuthConfig = useRuntimeConfig().public.firebaseAuth;
@@ -17,14 +17,17 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     auth.tenantId = firebaseAuthConfig.tenantId;
   }
 
-  // TODO
-  if (firebaseAuthConfig.emulatorHost && auth._canInitEmulator) {
+  if (nuxtApp.ssrContext) {
+    nuxtApp.ssrContext.event.context.firebaseServerApp = app;
+  }
+
+  if (firebaseAuthConfig.emulatorHost) {
     connectAuthEmulator(auth, firebaseAuthConfig.emulatorHost, { disableWarnings: true });
   }
 
   return {
     provide: {
-      auth,
+      auth: auth as Auth | undefined,
     },
   };
 });

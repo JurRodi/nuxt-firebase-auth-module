@@ -7,7 +7,6 @@ export const useAuthStore = defineStore('auth', () => {
 
   const authUser = ref<FirebaseUser>();
   const authState = ref<'loading' | 'unauthenticated' | 'authenticated'>('loading');
-  const isAuthorized = computed<boolean>(() => authState.value === 'authenticated');
 
   $auth?.onIdTokenChanged((user: User | null) => {
     if (!user) {
@@ -37,12 +36,12 @@ export const useAuthStore = defineStore('auth', () => {
   async function logout() {
     if (!$auth) return;
     await $auth.signOut();
+    window.location.reload();
   }
 
   return {
     authUser,
     authState,
-    isAuthorized,
 
     initialLoad,
     login,
