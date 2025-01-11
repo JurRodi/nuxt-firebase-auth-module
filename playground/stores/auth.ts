@@ -1,10 +1,11 @@
 import { signInWithEmailAndPassword, type User } from 'firebase/auth';
 import { defineStore } from 'pinia';
+import type { FirebaseUser } from '~/types';
 
 export const useAuthStore = defineStore('auth', () => {
   const { $auth } = useNuxtApp();
 
-  const authUser = ref<User>();
+  const authUser = ref<FirebaseUser>();
   const authState = ref<'loading' | 'unauthenticated' | 'authenticated'>('loading');
   const isAuthorized = computed<boolean>(() => authState.value === 'authenticated');
 
@@ -15,7 +16,7 @@ export const useAuthStore = defineStore('auth', () => {
       return;
     }
 
-    authUser.value = user;
+    authUser.value = user.toJSON() as FirebaseUser;
     authState.value = 'authenticated';
   });
 
@@ -24,15 +25,18 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function login(email: string, password: string) {
+    if (!$auth) return;
     await signInWithEmailAndPassword($auth, email, password);
   }
 
   async function getUserAccessToken(): Promise<string | undefined> {
+    if (!$auth) return;
     return $auth.currentUser?.getIdToken();
   }
 
   async function logout() {
-    await $auth?.signOut();
+    if (!$auth) return;
+    await $auth.signOut();
   }
 
   return {
