@@ -1,3 +1,4 @@
+import { defineNitroPlugin } from 'nitropack/runtime';
 import { deleteApp } from 'firebase/app';
 
 export default defineNitroPlugin((nitroApp) => {

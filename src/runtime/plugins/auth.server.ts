@@ -1,3 +1,4 @@
+import { defineNuxtPlugin, useCookie, useRuntimeConfig } from '#imports';
 import { initializeServerApp } from 'firebase/app';
 import { connectAuthEmulator, getAuth, type Auth } from 'firebase/auth';
 
@@ -60,7 +61,9 @@ async function tryRefreshToken(): Promise<string | undefined> {
     : 'https://securetoken.googleapis.com/v1/token';
 
   const url = new URL(tokenUrl);
-  url.searchParams.append('key', firebaseAuthConfig.config.apiKey);
+  if (firebaseAuthConfig.config.apiKey) {
+    url.searchParams.append('key', firebaseAuthConfig.config.apiKey);
+  }
 
   const response = await fetch(url, {
     method: 'POST',

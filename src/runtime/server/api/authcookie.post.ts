@@ -1,4 +1,8 @@
+import { assertMethod, defineEventHandler, readBody, setCookie } from 'h3';
+
 export default defineEventHandler(async (event) => {
+  assertMethod(event, 'POST');
+
   const { idToken, refreshToken } = await readBody(event);
 
   if (idToken) {

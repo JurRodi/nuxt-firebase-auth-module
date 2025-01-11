@@ -1,3 +1,4 @@
+import { defineNuxtPlugin, useRuntimeConfig } from '#imports';
 import { initializeApp } from 'firebase/app';
 import { connectAuthEmulator, getAuth, type Auth, type User } from 'firebase/auth';
 
