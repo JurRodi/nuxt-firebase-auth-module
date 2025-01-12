@@ -12,7 +12,7 @@ export default defineNuxtPlugin(() => {
     auth.tenantId = firebaseAuthConfig.tenantId;
   }
 
-  if (firebaseAuthConfig.emulatorHost) {
+  if (firebaseAuthConfig.emulatorHost && !auth.emulatorConfig) {
     connectAuthEmulator(auth, firebaseAuthConfig.emulatorHost);
   }
 

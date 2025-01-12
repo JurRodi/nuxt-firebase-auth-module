@@ -9,7 +9,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
   const app = initializeServerApp(firebaseAuthConfig.config, {
     authIdToken,
-    releaseOnDeref: nuxtApp.ssrContext?.event.node.req,
   });
 
   const auth = getAuth(app);
@@ -22,7 +21,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     nuxtApp.ssrContext.event.context.firebaseServerApp = app;
   }
 
-  if (firebaseAuthConfig.emulatorHost) {
+  if (firebaseAuthConfig.emulatorHost && !auth.emulatorConfig) {
     connectAuthEmulator(auth, firebaseAuthConfig.emulatorHost, { disableWarnings: true });
   }
 

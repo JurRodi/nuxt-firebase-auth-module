@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function logout() {
     if (!$auth) return;
     await $auth.signOut();
-    window.location.reload();
+    await navigateTo({ name: 'login' });
   }
 
   return {
