@@ -54,12 +54,8 @@ $auth?.onIdTokenChanged((user: User | null) => {
 # middleware/authstate.global.ts
 
 export default defineNuxtRouteMiddleware(async (to) => {
-  const authStore = useAuthStore();
-  await authStore.initialLoad();
-
-  if (to.name === 'index' && authStore.authState !== 'authenticated') {
-    return navigateTo({ name: 'login' });
-  }
+  const { $auth } = useNuxtApp();
+  await $auth?.authStateReady();
 });
 ```
 

@@ -1,9 +1,13 @@
 {
-  "name": "nuxt-firebase-auth-module",
-  "version": "1.0.0",
+  "name": "nuxt-firebase-auth",
+  "version": "0.1.1",
   "description": "Nuxt Firebase Auth Module",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JRaams/nuxt-firebase-auth-module.git"
+  },
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
@@ -21,7 +25,7 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "release": "pnpm run prepack && pnpm publish",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
@@ -31,21 +35,22 @@
     "@nuxt/kit": "^3.15.1"
   },
   "peerDependencies": {
-    "firebase": "^11.1.0"
+    "firebase": "^11.1.0",
+    "nuxt": "^3.15.1"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.7.0",
     "@nuxt/eslint-config": "^0.7.5",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/schema": "^3.15.1",
-    "@nuxt/test-utils": "^3.15.1",
+    "@nuxt/test-utils": "^3.15.4",
     "@types/node": "latest",
     "changelogen": "^0.5.7",
-    "eslint": "^9.17.0",
+    "eslint": "^9.18.0",
     "nuxt": "^3.15.1",
     "typescript": "~5.6.2",
     "vitest": "^2.1.8",
     "vue-tsc": "^2.2.0"
   },
-  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321"
+  "packageManager": "pnpm@9.15.3"
 }
