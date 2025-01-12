@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate .nuxt folder
+        run: pnpm run dev:prepare
+
       - name: Publish to npm
         # Without '--no-git-checks': ERR_PNPM_GIT_UNKNOWN_BRANCH  The Git HEAD may not attached to any branch, but your "publish-branch" is set to "master|main".
         run: pnpm publish --access public --no-git-checks
