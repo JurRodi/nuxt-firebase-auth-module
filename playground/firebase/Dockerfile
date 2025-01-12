@@ -1,7 +1,6 @@
-FROM alpine:3.21.2
+FROM node:20.14-alpine3.20
     WORKDIR /opt/firebase
-    RUN apk --no-cache add curl bash libc6-compat libstdc++ libgcc
-    RUN curl -sL https://firebase.tools | bash
+    RUN npm install -g firebase-tools
     COPY .firebaserc firebase.json ./
     RUN firebase setup:emulators:ui
     CMD ["firebase", "emulators:start", "--only", "auth"]

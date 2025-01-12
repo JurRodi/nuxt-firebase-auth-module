@@ -4,14 +4,14 @@
 
 Nuxt 3 module for Google Firebase authentication.
 
-## Features
+## 1. Features
 
 1. Support for both SPA and SSR
 2. Local Firebase emulator support
 3. Multi tenancy support
 4. No firebase-admin needed with admin permissions in GKE
 
-## Quick Setup
+## 2. Quick Setup
 
 1. Install the package
 
@@ -61,19 +61,33 @@ export default defineNuxtRouteMiddleware(async (to) => {
 });
 ```
 
-## Local development
+## 3. Local development
+
+### a. Starting the playground
 
 ```bash
 pnpm install
 
 pnpm run dev:prepare
 
-cd playground
-
 pnpm run dev
 ```
 
-## Overriding config with environment variables
+Visit the playground on: http://localhost:3000/
+
+### b. Starting a local auth emulator
+
+If you want to use a local Firebase auth emulator instead of an online Firebase instance:
+
+```bash
+cd playground
+
+docker compose up
+```
+
+Visit the auth emulator ui on: http://localhost:4000/auth
+
+## 4. Overriding config with environment variables
 
 Module configuration is mapped onto runtimeConfig -> `runtimeConfig.public.firebaseAuth`
 
