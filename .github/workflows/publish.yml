@@ -23,6 +23,7 @@ jobs:
         run: pnpm install
 
       - name: Publish to npm
-        run: pnpm publish --access restricted
+        # Without '--no-git-checks': ERR_PNPM_GIT_UNKNOWN_BRANCH  The Git HEAD may not attached to any branch, but your "publish-branch" is set to "master|main".
+        run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
