@@ -18,9 +18,9 @@ export default defineNuxtPlugin(() => {
 
   auth.onIdTokenChanged(async (user: User | null) => {
     try {
-      // @ts-expect-error Firebase types suck
+      // @ts-expect-error Firebase types don't expose the token manager
       const idToken = user?.stsTokenManager?.accessToken;
-      // @ts-expect-error Firebase types suck
+      // @ts-expect-error Firebase types don't expose the token manager
       const refreshToken = user?.stsTokenManager?.refreshToken;
 
       await $fetch('/api/authcookie', {

@@ -1,5 +1,7 @@
 # nuxt-firebase-auth-module
 
+[![publish to npm](https://github.com/JRaams/nuxt-firebase-auth-module/actions/workflows/publish.yml/badge.svg)](https://github.com/JRaams/nuxt-firebase-auth-module/actions/workflows/publish.yml)
+
 Nuxt 3 module for Google Firebase authentication.
 
 ## Features
