@@ -1,4 +1,6 @@
-# nuxt-firebase-auth-module
+<img align="right" height="100" src="./docs/frog.png">
+
+# Nuxt Firebase Auth
 
 [![publish to npm](https://github.com/JRaams/nuxt-firebase-auth-module/actions/workflows/publish.yml/badge.svg)](https://github.com/JRaams/nuxt-firebase-auth-module/actions/workflows/publish.yml)
 
@@ -15,13 +17,13 @@ Nuxt 3 module for Google Firebase authentication.
 
 1. Install the package
 
-`pnpm i nuxt-firebase-auth-module firebase`
+`pnpm i nuxt-firebase-auth firebase`
 
 2. Update nuxt.config.ts
 
 ```typescript
 {
-    modules: ['nuxt-firebase-auth-module'],
+    modules: ['nuxt-firebase-auth'],
     // ...
     firebaseAuth: {
         config: {
@@ -97,7 +99,3 @@ NUXT_PUBLIC_FIREBASE_AUTH_CONFIG={"apiKey":"apikeyhere"}
 NUXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST="http://localhost:9000"
 NUXT_PUBLIC_FIREBASE_AUTH_TENANT_ID="tenantname"
 ```
-
----
-
-Generated using `npx nuxi init -t module` https://nuxt.com/docs/guide/going-further/modules#using-the-starter
