@@ -1,37 +1,24 @@
-import { assertMethod, defineEventHandler, readBody, setCookie } from 'h3';
+import { assertMethod, defineEventHandler, readBody, setCookie, deleteCookie } from 'h3';
+import type { CookieOptions } from 'nuxt/app';
 
 export default defineEventHandler(async (event) => {
   assertMethod(event, 'POST');
 
+  const { idTokenCookie, refreshTokenCookie } = useRuntimeConfig().firebaseAuth;
   const { idToken, refreshToken } = await readBody(event);
 
+  const idTokenCookieOptions = idTokenCookie.options as CookieOptions;
+  const refreshTokenCookieOptions = refreshTokenCookie.options as CookieOptions;
+
   if (idToken) {
-    setCookie(event, 'nfa-id', idToken, {
-      httpOnly: true,
-      sameSite: 'strict',
-      secure: true,
-    });
+    setCookie(event, idTokenCookie.name, idToken, idTokenCookieOptions);
   } else {
-    setCookie(event, 'nfa-id', '', {
-      httpOnly: true,
-      sameSite: 'strict',
-      secure: true,
-      maxAge: 0,
-    });
+    deleteCookie(event, idTokenCookie.name, idTokenCookieOptions);
   }
 
   if (refreshToken) {
-    setCookie(event, 'nfa-refresh', refreshToken, {
-      httpOnly: true,
-      sameSite: 'strict',
-      secure: true,
-    });
+    setCookie(event, refreshTokenCookie.name, refreshToken, refreshTokenCookieOptions);
   } else {
-    setCookie(event, 'nfa-refresh', '', {
-      httpOnly: true,
-      sameSite: 'strict',
-      secure: true,
-      maxAge: 0,
-    });
+    deleteCookie(event, refreshTokenCookie.name, refreshTokenCookieOptions);
   }
 });

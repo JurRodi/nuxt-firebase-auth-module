@@ -1,6 +1,6 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports';
 import { initializeApp } from 'firebase/app';
-import { connectAuthEmulator, getAuth, type Auth, type User } from 'firebase/auth';
+import { connectAuthEmulator, getAuth, type User } from 'firebase/auth';
 
 export default defineNuxtPlugin(() => {
   const firebaseAuthConfig = useRuntimeConfig().public.firebaseAuth;
@@ -23,7 +23,7 @@ export default defineNuxtPlugin(() => {
       // @ts-expect-error Firebase types don't expose the token manager
       const refreshToken = user?.stsTokenManager?.refreshToken;
 
-      await $fetch('/api/authcookie', {
+      await $fetch(firebaseAuthConfig.authCookieEndpoint, {
         method: 'POST',
         body: {
           idToken,
@@ -37,7 +37,7 @@ export default defineNuxtPlugin(() => {
 
   return {
     provide: {
-      auth: auth as Auth | undefined,
+      auth,
     },
   };
 });

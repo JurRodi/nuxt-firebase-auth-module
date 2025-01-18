@@ -29,7 +29,6 @@ Nuxt 3 module for Google Firebase authentication.
         config: {
             apiKey: '_',
         },
-        tenantId: '',
         emulatorHost: 'http://localhost:9099',
     },
 }
@@ -70,8 +69,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
 ```bash
 pnpm install
 
-pnpm run dev:prepare
-
 pnpm run dev
 ```
 
@@ -91,11 +88,50 @@ Visit the auth emulator ui on: http://localhost:4000/auth
 
 ## 4. Overriding config with environment variables
 
-Module configuration is mapped onto runtimeConfig -> `runtimeConfig.public.firebaseAuth`
+Module configuration is mapped onto the runtimeConfig:
+
+```json
+{
+  "public": {
+    "firebaseAuth": {
+      "config": {
+        "apiKey": "_"
+      },
+      "tenantId": "",
+      "emulatorHost": "http://localhost:9099",
+      "authCookieEndpoint": "/api/authcookie"
+    }
+  },
+  "firebaseAuth": {
+    "idTokenCookie": {
+      "name": "nfa-id",
+      "options": {
+        "httpOnly": true,
+        "sameSite": "strict",
+        "secure": true
+      }
+    },
+    "refreshTokenCookie": {
+      "name": "nfa-refresh",
+      "options": {
+        "httpOnly": true,
+        "sameSite": "strict",
+        "secure": true
+      }
+    }
+  }
+}
+```
 
 ```shell
-# .env
+# public
 NUXT_PUBLIC_FIREBASE_AUTH_CONFIG={"apiKey":"apikeyhere"}
-NUXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST="http://localhost:9000"
+NUXT_PUBLIC_FIREBASE_AUTH_EMULATOR_HOST="http://localhost:9099"
 NUXT_PUBLIC_FIREBASE_AUTH_TENANT_ID="tenantname"
+
+# private
+NUXT_FIREBASE_AUTH_ID_TOKEN_COOKIE_NAME="nfa-id"
+NUXT_FIREBASE_AUTH_ID_TOKEN_COOKIE_OPTIONS={"httpOnly": true,"sameSite": "strict","secure": true}
+NUXT_FIREBASE_AUTH_REFRESH_TOKEN_COOKIE_NAME="nfa-refresh"
+NUXT_FIREBASE_AUTH_REFRESH_TOKEN_COOKIE_OPTIONS={"httpOnly": true,"sameSite": "strict","secure": true}
 ```

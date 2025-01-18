@@ -33,7 +33,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 });
 
 async function loadIdToken(): Promise<string | undefined> {
-  const cookieValue = useCookie('nfa-id').value;
+  const { idTokenCookie } = useRuntimeConfig().firebaseAuth;
+  const cookieValue = useCookie(idTokenCookie.name).value;
 
   if (cookieValue) {
     try {
@@ -50,7 +51,8 @@ async function loadIdToken(): Promise<string | undefined> {
 }
 
 async function tryRefreshToken(): Promise<string | undefined> {
-  const refreshToken = useCookie('nfa-refresh').value;
+  const { refreshTokenCookie } = useRuntimeConfig().firebaseAuth;
+  const refreshToken = useCookie(refreshTokenCookie.name).value;
   if (!refreshToken) return undefined;
 
   const firebaseAuthConfig = useRuntimeConfig().public.firebaseAuth;
