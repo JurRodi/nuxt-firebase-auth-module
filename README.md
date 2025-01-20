@@ -23,14 +23,17 @@ Nuxt 3 module for Google Firebase authentication.
 
 ```typescript
 {
-    modules: ['nuxt-firebase-auth'],
-    // ...
-    firebaseAuth: {
-        config: {
-            apiKey: '_',
-        },
-        emulatorHost: 'http://localhost:9099',
+  modules: ['nuxt-firebase-auth'],
+  // ...
+  firebaseAuth: {
+    public: {
+      config: {
+        apiKey: '-',
+      },
+      authCookieEndpoint: '/api/authCookie',
+      emulatorHost: 'http://localhost:9099',
     },
+  },
 }
 ```
 
