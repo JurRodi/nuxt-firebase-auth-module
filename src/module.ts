@@ -113,6 +113,6 @@ declare module '@nuxt/schema' {
 
 declare module '#app' {
   interface NuxtApp {
-    $auth: Auth | undefined;
+    $auth: Auth;
   }
 }

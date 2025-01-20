@@ -27,7 +27,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
   return {
     provide: {
-      auth: auth as Auth | undefined,
+      auth: auth as Auth,
     },
   };
 });
